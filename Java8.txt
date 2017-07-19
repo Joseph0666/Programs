@@ -1,0 +1,273 @@
+						INTERFACES
+
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.function.ToDoubleFunction;
+import java.util.function.UnaryOperator;
+
+public class PredicateMain {
+
+	public PredicateMain() {
+		List<Employee> empList = new ArrayList<Employee>();
+		Employee emp1 = new Employee(1,"paypal",12345.34);
+		Employee emp2 = new Employee(2,"google",22345.34);
+		Employee emp3 = new Employee(3,"paypal",42345.34);
+		Employee emp4 = new Employee(4,"paypal",32345.34);
+		Employee emp5 = new Employee(5,"google",62345.34);
+		empList.add(emp1);
+		empList.add(emp2);
+		empList.add(emp3);
+		empList.add(emp4);
+		empList.add(emp5);
+		// find google emp
+		Predicate<Employee> googlePredicate = (em) -> em.getOrgName().startsWith("google");
+		Predicate<Employee> salaryPredicate = (em) -> em.getSalary() > 25000 ;
+		printEmp(empList,googlePredicate);
+		// find emp whose salary is > 25000
+		printEmp(empList,salaryPredicate);
+		// find google emp whose sal is > 25000
+		printEmp(empList,googlePredicate.and(salaryPredicate));
+		
+		// send emp object as input and get salary as output
+		// autoboxing , unboxing
+		Function<Employee,Double> fun = (em) -> em.getSalary();
+		double sal = fun.apply(emp1);
+		System.out.println(sal);
+		
+		// rewriting code to avoid autoboxing 
+		ToDoubleFunction<Employee> toDoubleFun = (em) -> em.getSalary();
+		toDoubleFun.applyAsDouble(emp1);
+		
+		Supplier<Employee> supp = () -> new Employee();
+		Employee emp = supp.get();
+		
+		BinaryOperator<Double> binOps = (one,two) -> one + two;
+		double addRes =  binOps.apply(emp1.getSalary(), emp2.getSalary());
+		
+		UnaryOperator<String> uOp = (str) -> str.toUpperCase();
+		
+		String output = uOp.apply("This is test ");
+		System.out.println(output);
+		
+		
+	}
+	public void printEmp(List<Employee> listEmp,Predicate<Employee> predicate) {
+		/*for (Employee employee : listEmp) {
+			if(predicate.test(employee)) {
+				System.out.println(employee);
+			}
+		}*/
+		Consumer<Employee> cons = (employee) -> {
+			if(predicate.test(employee)) {
+				System.out.println(employee);
+			}	
+		};
+		listEmp.forEach(cons);
+		System.out.println("-------------------------------------------");
+	}
+	public static void main(String[] args) {
+		PredicateMain main = new PredicateMain();
+	}
+}
+
+
+
+
+						Code Evolution
+
+
+
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import static java.util.Comparator.comparing;
+import java.util.List;
+
+// sort for emplist based on salary
+public class CodeEvolution {
+//TimSort 
+	public CodeEvolution() {
+		List<Employee> empList = new ArrayList<Employee>();
+		Employee emp1 = new Employee(1,"paypal",12345.34);
+		Employee emp2 = new Employee(2,"google",22345.34);
+		Employee emp3 = new Employee(3,"paypal",42345.34);
+		Employee emp4 = new Employee(4,"paypal",32345.34);
+		Employee emp5 = new Employee(5,"google",62345.34);
+		empList.add(emp1);
+		empList.add(emp2);
+		empList.add(emp3);
+		empList.add(emp4);
+		empList.add(emp5);
+		// JDK 1.3
+		Collections.sort(empList, new Comparator<Employee>() {
+
+			@Override
+			public int compare(Employee em1, Employee em2) {
+				if(em1.getSalary() > em2.getSalary()) {
+					return -1;
+				}
+				if(em1.getSalary() < em2.getSalary()) {
+					return 1;
+				}
+				return 0;
+			}
+		});
+		System.out.println(empList);
+		// JDK 1.4
+		Collections.sort(empList, new Comparator<Employee>() {
+
+			@Override
+			public int compare(Employee em1, Employee em2) {
+				return Double.compare(em1.getSalary(), em2.getSalary());
+			}
+		});
+		// JDK 1.8 lambda
+		Collections.sort(empList,(em1,em2) -> Double.
+					compare(em1.getSalary(), em2.getSalary()));
+		// JDK 1.8 method reference
+		Collections.sort(empList,comparing(Employee::getSalary));
+	}
+	public static void main(String[] args) {
+		CodeEvolution ce = new CodeEvolution();
+	}
+}
+				Stream API
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import edu.ksr.java8.predicate.Employee;
+
+public class StreamExample {
+	
+	public StreamExample() {
+		List<Employee> empList = new ArrayList<Employee>();
+		Employee emp1 = new Employee(1,"paypal",12345.34);
+		Employee emp2 = new Employee(2,"google",22345.34);
+		Employee emp3 = new Employee(3,"paypal",42345.34);
+		Employee emp4 = new Employee(4,"paypal",32345.34);
+		Employee emp5 = new Employee(5,"google",62345.34);
+		empList.add(emp1);
+		empList.add(emp2);
+		empList.add(emp3);
+		empList.add(emp4);
+		empList.add(emp5);
+		
+		// find sum of paypal emp salary 
+		empList.stream().filter((em) -> em.getOrgName().startsWith("paypal"))
+						.map((em) -> em.getSalary())
+						.reduce((oneSalary,twoSalary) -> oneSalary + twoSalary);
+		
+		double ret = empList.stream().filter((em) -> em.getOrgName().startsWith("paypal"))
+		.mapToDouble((em) -> em.getSalary()).sum();
+		System.out.println(ret);
+		//.reduce((oneSalary,twoSalary) -> oneSalary + twoSalary);
+		
+		
+		// SQL pratitionby , groupby
+		Map<String,List<Employee>> map = empList.stream()
+						.collect(Collectors.groupingBy(Employee::getOrgName));
+		System.out.println(map);
+		
+		Map<Boolean,List<Employee>> mapPart  = empList.stream()
+			.collect(Collectors.partitioningBy((em) -> em.getOrgName().startsWith("google")));
+		System.out.println(mapPart);
+	}
+	
+	public static void main(String[] args) {
+		StreamExample se = new StreamExample(); 
+	}
+
+}
+	
+
+
+						Executor Main
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class ExecutorMain extends JFrame{
+	
+	JButton but;
+	public ExecutorMain(){
+		
+		but = new JButton("click");
+		but.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startThreads();
+				
+			}
+		});
+		add(but);
+	}
+	private static final int NTHREDS = 1000;
+
+	public static void main(String[] args) {
+		ExecutorMain main = new ExecutorMain();
+		main.setSize(300, 300);
+		main.setVisible(true);
+	}
+	public void startThreads(){
+		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
+		//ExecutorService executor = Executors.newCachedThreadPool();
+		long start = System.currentTimeMillis();
+		for (int i = 0; i < 5000; i++) {
+			Runnable worker = new MyRunnable(1000000L + i);
+			//Thread thr = new Thread(worker);
+			//thr.setPriority(5);
+			executor.execute(worker);
+		}
+		// This will make the executor accept no new threads
+		// and finish all existing threads in the queue
+		executor.shutdown();
+		// Wait until all threads are finish
+		while (!executor.isTerminated()) {
+
+		}
+		long end = System.currentTimeMillis();
+		System.out.println("Finished all threads "+(end-start));
+	}
+}
+
+
+					My runnable
+
+
+
+public class MyRunnable implements Runnable {
+	private final long countUntil;
+
+	MyRunnable(long countUntil) {
+		this.countUntil = countUntil;
+	}
+
+	@Override
+	public void run() {
+		long sum = 0;
+		for (long i = 1; i < countUntil; i++) {
+			sum += i;
+		}
+		System.out.println(Thread.currentThread().getName());
+	}
+}
