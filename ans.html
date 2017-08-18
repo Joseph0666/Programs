@@ -1,0 +1,102 @@
+<doctype html>
+<html>
+<head>
+<style>
+p,h2,h4{
+font-family:Times New Roman;
+font-size:25px;
+color:black;
+}
+</style>
+</head>
+<body>
+<pre>
+<h2>
+Multiple Choice Questions
+45 * 1 = 45 Marks (60 Mins)
+1. Threads => 10 Questions
+2. Collections => 10 Questions
+3. I/O Streams => 10 Questions
+4. RDBMS/Oracle => 15 Questions
+5. Total => 45 Questions
+</h2>
+<p>1. When a class extends the Thread class, it should override ............ method of Thread class to start that thread.
+<input type="radio" name="ans" onclick="test()"  id="1">A. start()
+<input type="radio" name="ans" onclick="test1()" id="2">B. run()
+<input type="radio" name="ans" onclick="test()" id="3">C. init()
+<input type="radio" name="ans" onclick="test()" id="4">D. go()
+<h4 id="demo"></h4></p>
+<p>2. Which of the following constructor of class Thread is valid one?
+<input type="radio" name="ans1" onclick="test2()">A. Thread(Runnable threadOb, int priority)
+<input type="radio" name="ans1" onclick="test2()">B. Thread(int priority)
+<input type="radio" name="ans1" onclick="test3()">C. Thread(Runnable threadOb, String threadName)
+<input type="radio" name="ans1" onclick="test2()">D. Thread(String threadName, int priority)
+<input type="radio" name="ans1" onclick="test2()">E. None of these<h4 id="demo1"></h4></p><br>
+<p>3. Which of the following statements is/are correct
+i. On calling Thread start () method a new thread get created.
+ii. Thread start () method call run () method internally
+iii. Thread run () method can also be called directly to create thread.
+iv. All correct
+<input type="radio" name="ans2" onclick="test4()">A. i
+<input type="radio" name="ans2" onclick="test5()">B. i & ii
+<input type="radio" name="ans2" onclick="test4()">C. iii
+<input type="radio" name="ans2" onclick="test4()">D. iv
+<input type="radio" name="ans2" onclick="test4()">E. ii & iii<h4 id="demo2"></h4></p><br>
+<marquee><h4 id="demo3"></h4></marquee>
+<center><input type="button" onclick="disp()" value="Submit to review your marks"></center>
+</pre>
+<script>
+var count=0;
+var count1=0;
+var total=3;
+var sum1=0;
+function test(){
+var result="Wrong";
+var str=result.fontcolor("red");
+	document.getElementById("demo").innerHTML=str;
+	count1++;
+}
+function test1(){
+	var result="Correct";
+	
+var str=result.fontcolor("green");
+	document.getElementById("demo").innerHTML=str;
+	count++;
+}
+function test2(){
+
+var result="Wrong";
+var str=result.fontcolor("red");
+	document.getElementById("demo1").innerHTML=str;
+	count1++;
+}
+function test3(){
+
+var result="Correct";
+var str=result.fontcolor("green");
+	document.getElementById("demo1").innerHTML=str;
+	count++;
+}
+function test4(){
+
+var result="Wrong";
+var str=result.fontcolor("red");
+	document.getElementById("demo2").innerHTML=str;
+	count1++;
+}
+function test5(){
+var result="Correct";
+var str=result.fontcolor("green");
+	document.getElementById("demo2").innerHTML=str;	
+	count++;
+}
+function disp(){
+var sum=count+count1;
+if(sum>=total){
+var display="Correct Answer = "+count+" out of "+total;
+		document.getElementById("demo3").innerHTML=display;
+}
+}
+</script>
+</body>
+</html>

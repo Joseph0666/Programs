@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<style>
+body{
+border:1px solid grey;	
+}
+header{
+background-color:lightgreen;
+text-align:center;
+border:1px solid grey;	
+}
+img{
+float:left;
+border:1px solid grey;
+}
+
+article {
+    margin-left: 270px;
+    border-left: 1px solid gray;
+}
+h2{
+color:blue;
+}
+table,tr,td{
+padding:5px;
+border:1px solid gray;
+border-collapse:collapse;
+background-color:DarkTurquoise;
+border-color:white;
+}
+table#col{
+	width:300px;
+	height:150px;
+}
+footer{
+text-align:center;
+}
+</style>
+</head>
+<body>
+<img src="wipro-logo.jpg" width="20%" height="20%">
+<header><br><br><h1>Welcome to wipro</h1><br><br><br></header> 
+<article><br><center><h2>Account Login</h2><br>
+<form id="form">
+<table cellspacing="40px" id="col">
+<tr>
+<td>Username</td>
+<td><input type="text" id="user"></td>
+</tr>
+<tr>
+<td>Password</td>
+<td><input type="Password" id="pass"></td>
+</tr>
+<tr>
+<td><input type="reset" value="reset" </td>
+<td><a href="net cal.html"><input type="button" value="Login" onclick="test()"></a></td>
+</tr>
+</table></form>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</center></article>
+<hr>
+<footer>Copyrights 	&copy 2017  Wipro Technologies.All rights reserved</footer> 	<br><br>
+<script>
+	function test(){
+	var user1= document.getElementById("user").value;
+var len=user1.length;
+var pass1=document.getElementById("pass").value;
+var len1=pass1.length;
+var count=0;
+		if(len <8 && len1 <8){
+		alert("please enter valid user name and password");
+		count++;
+		}
+		else if(len<8){
+			alert("please enter username above 8 char");
+			count++;
+			}
+		else if(len1<8){
+		alert("please enter password above 8 char");
+		count++;
+		}		
+	}
+</script>
+</body>
+</html>
