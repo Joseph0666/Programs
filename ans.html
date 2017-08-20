@@ -7,9 +7,22 @@ font-family:Times New Roman;
 font-size:25px;
 color:black;
 }
+table,tr,td{
+border:1px solid black;
+padding:30px;
+border-collapse:collapse;
+cellspacing:50px;
+}
+#border{
+	border:1px solid black;
+	background-color:#F3D6E4;
+	text-align:center;
+	width:100px;	
+}
 </style>
 </head>
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <pre>
 <h2>
 Multiple Choice Questions
@@ -21,30 +34,48 @@ Multiple Choice Questions
 5. Total => 45 Questions
 </h2>
 <p>1. When a class extends the Thread class, it should override ............ method of Thread class to start that thread.
-<input type="radio" name="ans" onclick="test()"  id="1">A. start()
-<input type="radio" name="ans" onclick="test1()" id="2">B. run()
-<input type="radio" name="ans" onclick="test()" id="3">C. init()
-<input type="radio" name="ans" onclick="test()" id="4">D. go()
+<p id="border" align="left">Options</p>
+<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans" onclick="test()"  id="1"></td><td width="100%"><p id="row">A. start()</p></td></tr>
+<tr><td><input type="radio" name="ans" onclick="test1()" id="2"></td><td><p id="col">B. run()</p></td></tr>
+<tr><td><input type="radio" name="ans" onclick="test()" id="3"></td><td><p id="row">C. init()</p></td></tr>
+<tr><td><input type="radio" name="ans" onclick="test()" id="4"></td><td><p id="row">D. go()</p> </td></table>
 <h4 id="demo"></h4></p>
 <p>2. Which of the following constructor of class Thread is valid one?
-<input type="radio" name="ans1" onclick="test2()">A. Thread(Runnable threadOb, int priority)
-<input type="radio" name="ans1" onclick="test2()">B. Thread(int priority)
-<input type="radio" name="ans1" onclick="test3()">C. Thread(Runnable threadOb, String threadName)
-<input type="radio" name="ans1" onclick="test2()">D. Thread(String threadName, int priority)
-<input type="radio" name="ans1" onclick="test2()">E. None of these<h4 id="demo1"></h4></p><br>
+<p id="border" align="left">Options</p>
+<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans1" onclick="test2()"></td><td><p>A. Thread(Runnable threadOb, int priority)</p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="test2()"></td><td><p>B. Thread(int priority)</p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="test3()"></td><td><p>C. Thread(Runnable threadOb, String threadName)</p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="test2()"></td><td><p>D. Thread(String threadName, int priority)</p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="test2()"></td><td><p>E. None of these</p></td></tr></p></table><h4 id="demo1"></h4><br>
 <p>3. Which of the following statements is/are correct
 i. On calling Thread start () method a new thread get created.
 ii. Thread start () method call run () method internally
 iii. Thread run () method can also be called directly to create thread.
 iv. All correct
-<input type="radio" name="ans2" onclick="test4()">A. i
-<input type="radio" name="ans2" onclick="test5()">B. i & ii
-<input type="radio" name="ans2" onclick="test4()">C. iii
-<input type="radio" name="ans2" onclick="test4()">D. iv
-<input type="radio" name="ans2" onclick="test4()">E. ii & iii<h4 id="demo2"></h4></p><br>
-<marquee><h4 id="demo3"></h4></marquee>
-<center><input type="button" onclick="disp()" value="Submit to review your marks"></center>
+<p id="border" align="left">Options</p>
+<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans2" onclick="test4()"></td><td><p>A. i</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="test5()"></td><td><p>B. i & ii</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="test4()"></td><td><p>C. iii</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="test4()"></td><td><p>D. iv</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="test4()"></td><td><p>E. ii & iii</p></td></tr></table><h4 id="demo2"></h4></p><br>
+<h4 id="demo3"></h4> 
+<center><input type="submit" onclick="disp()" value="Submit to review your marks"></center>
 </pre>
+<script>
+$(document).ready(function(){
+    $("#col").click(function(){
+        $(this).css("background-color","green");
+    });
+});
+$(document).ready(function(){
+    $("#row").click(function(){
+        $(this).css("background-color","red");
+    });
+});
+</script>
 <script>
 var count=0;
 var count1=0;
@@ -58,20 +89,17 @@ var str=result.fontcolor("red");
 }
 function test1(){
 	var result="Correct";
-	
 var str=result.fontcolor("green");
 	document.getElementById("demo").innerHTML=str;
 	count++;
 }
 function test2(){
-
 var result="Wrong";
 var str=result.fontcolor("red");
 	document.getElementById("demo1").innerHTML=str;
 	count1++;
 }
 function test3(){
-
 var result="Correct";
 var str=result.fontcolor("green");
 	document.getElementById("demo1").innerHTML=str;
@@ -93,7 +121,8 @@ var str=result.fontcolor("green");
 function disp(){
 var sum=count+count1;
 if(sum>=total){
-var display="Correct Answer = "+count+" out of "+total;
+var disp1=Math.abs(count1-count);
+var display="Correct Answer = "+disp1+" out of "+total;
 		document.getElementById("demo3").innerHTML=display;
 }
 }
