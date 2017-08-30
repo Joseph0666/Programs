@@ -1,0 +1,141 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="t1.html" />
+<script>
+//var myVar = setInterval(timer,1000);
+//setTimeout(function(){confirm("you have 1 mins")},3000);
+//setTimeout("window.close()",6000);
+//confirm("The test must be end after 5 mins");
+//confirm("you want to click the option only once you select the option cant change the option.");
+</script>
+<style>
+h5{
+text-align:right;
+		font-size:30px;
+		background-color:#20B2AA;
+	color:black;
+}
+#hea{
+		border:1px solid black;
+		font-size:30px;
+		background-color:#20B2AA;
+	}
+	#heading{
+	background-color:#20B2AA;
+	border:1px solid black;
+	margin-top:-6px;
+}
+p,h2,h4{
+font-family:Times New Roman;
+font-size:25px;
+color:black;
+}
+#border{
+	border:1px solid black;
+	background-color:#F3D6E4;
+	text-align:center;
+	width:100px;	
+}
+table,tr,td{
+border:1px solid black;
+padding:10px;
+border-collapse:collapse;
+cellspacing:10px;
+}
+
+</style>
+<script type="text/javascript">
+    var mins = 1;
+    var secs = mins * 60;
+    function countdown() {
+    	setTimeout('Decrement()',1000);
+    }
+    function Decrement() {
+    	if (document.getElementById) {
+    		minutes = document.getElementById("minutes");
+    		seconds = document.getElementById("seconds");
+    		if (seconds < 59) {
+    			seconds.value = secs;
+    		} else {
+    			minutes.value = getminutes();
+    			seconds.value = getseconds();
+    		}
+    		secs--;
+    		setTimeout('Decrement()',1000);
+    	}
+    }
+    function getminutes() {
+    	mins = Math.floor(secs / 60);
+    	return mins;
+    }
+    function getseconds() {
+    	return secs-Math.round(mins *60);
+    }
+    </script>
+</head>
+<body>
+<div id="hea">
+<header>
+<h3>Collections</h3>
+<hr>
+<h5 id="timer">
+    	<input id="minutes" type="text" style="width: 14px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> minutes & <input id="seconds" type="text" style="width: 26px; border: none; background-color:none; font-size: 16px; font-weight: bold;"> seconds.
+    </h5>
+    <script>
+    countdown();
+    </script>
+</header>
+</div>
+<p>1. Which of these packages contain all the collection classes?
+<p id="border" align="left">Options</p>
+	<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans" onclick="collect1()"></td><td width="100%"><p>a) java.lang</p></td></tr>
+<tr><td><input type="radio" name="ans" onclick="collect2()"></td><td><p>b) java.util</p></td></tr>
+<tr><td><input type="radio" name="ans" onclick="collect1()"></td><td><p>c) java.net)</p></td></tr>
+<tr><td><input type="radio" name="ans" onclick="collect1()"></td><td><p>d) java.awt</p> </td></table>
+<h4 id="co1"></h4>
+</table>
+</p>
+<p>2. Which of these classes is not part of Java collection framework?
+<p id="border" align="left">Options</p>
+	<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans1" onclick="collect11()"></td><td width="100% "><p>a) Maps </p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="collect14()"></td><td><p>b) Array</p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="collect14()"></td><td><p>c) Stack</p></td></tr>
+<tr><td><input type="radio" name="ans1" onclick="collect14()"></td><td><p>d) Queue</p> </td></table>
+<h4 id="co11"></h4>
+</table>
+</p>
+<p>3. Which of these interface is not a part of Java collection framework?
+<p id="border" align="left">Options</p>
+<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans2" onclick="collect23()"></td><td width="100%"><p>a) List</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="collect23()"></td><td><p>b) Set</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="collect23()"></td><td><p>c) SortedMap</p></td></tr>
+<tr><td><input type="radio" name="ans2" onclick="collect24()"></td><td><p>d) SortedList</p> </td></table>
+<h4 id="co12"></h4>
+</table>
+</p>
+<p>4. Which of these methods deletes all the elements from invoking collection?
+<p id="border" align="left">Options</p>
+<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans3" onclick="collect31()"></td><td width="100%"><p>a) clear()</p></td></tr>
+<tr><td><input type="radio" name="ans3" onclick="collect32()"></td><td><p>b) reset()</p></td></tr>
+<tr><td><input type="radio" name="ans3" onclick="collect32()"></td><td><p>c) delete()</p></td></tr>
+<tr><td><input type="radio" name="ans3" onclick="collect32()"></td><td><p>d) refresh()</p> </td></table>
+<h4 id="co13"></h4>
+</table>
+</p>
+<p>5. What is Collection in Java?
+<p id="border" align="left">Options</p>
+<table width="100%" height="10%">
+<tr><td width="5%"><input type="radio" name="ans4" onclick="collect42()"></td><td width="100%"><p>a) A group of objects</p></td></tr>
+<tr><td><input type="radio" name="ans4" onclick="collect41()"></td><td><p>b) A group of classes</p></td></tr>
+<tr><td><input type="radio" name="ans4" onclick="collect41()"></td><td><p>c) A group of interfaces</p></td></tr>
+<tr><td><input type="radio" name="ans4" onclick="collect41()"></td><td><p>d) None of the mentioned</p> </td></table>
+<h4 id="co14"></h4>
+</table>
+</p>
+<center><input type="submit" onclick="disp2()" value="Submit to take next Quiz"> <input type="submit" onclick="disp1()" value="Quit this page"></center>
+</body>
+</html>
